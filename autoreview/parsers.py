@@ -47,3 +47,4 @@ def project_overview(root_dir: str) -> dict:
 		if p.is_file():
 			files.append(str(p.relative_to(root)))
 	return {'root': str(root), 'files': files}
+

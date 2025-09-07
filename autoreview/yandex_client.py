@@ -62,3 +62,4 @@ class YandexGPTClient:
 	def _offline_reply(self, prompt: str) -> str:
 		prefix = '[OFFLINE DUMMY]'
 		return f"{prefix} {prompt[:400]}\n\n(summary unavailable; configure YANDEX_API_KEY and YANDEX_FOLDER_ID)"
+
