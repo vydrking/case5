@@ -1,0 +1,28 @@
+[build-system]
+requires = ['setuptools>=68', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'autoreview'
+version = '0.1.0'
+description = 'Automatic two-agent project review using LangGraph and YandexGPT'
+requires-python = '>=3.11'
+dependencies = [
+  'requests>=2.32.3',
+  'beautifulsoup4>=4.12.3',
+  'lxml>=5.2.2',
+  'langchain-core>=0.3.7',
+  'langgraph>=0.2.30',
+  'tqdm>=4.66.4',
+  'python-dotenv>=1.0.1',
+  'llama-index-core>=0.10.58',
+  'llama-index-embeddings-fastembed>=0.2.0'
+]
+
+[project.scripts]
+autoreview = 'autoreview.cli:main'
+
+[tool.setuptools]
+packages = ['autoreview']
+
+

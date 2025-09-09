@@ -1,0 +1,580 @@
+/* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
+:root {
+  /*размеры*/
+  --page-width: 1024px;
+  --header-height: 768px;
+  /*оформление страницы */
+  --main-font: "IBM Plex mono";
+  --bg-color: #000028;
+  --bg-heading: #ff0070;
+  --accent-color: #ff0070;
+  --text-color: #f1b2ce;
+  --txt-color-h: #000028;
+  --col-or-h: #db00ff;
+  --shadow-color: #ff0070;
+}
+
+.page {
+  /* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: var(--page-width);
+  color: var(--text-color, #f1b2ce);
+  font-family: var(--main-font, IBMPlexMono);
+  background-color: var(--bg-color, #000028);
+  background-attachment: fixed;
+}
+
+header {
+  width: var(--page-width);
+  display: flex;
+  height: var(--header-height);
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: auto;
+}
+
+.decorated-zone {
+  background-size: cover;
+  background-position: center;
+  background-image: url(../images/cover-image-dark.png);
+}
+
+.header__theme-menu-item {
+  display: flex;
+  list-style-type: none;
+  gap: 10px;
+  background: none;
+}
+
+.header__theme-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__theme-menu-list {
+  display: flex;
+  gap: 24px;
+  padding-left: 9vh;
+  padding-top: 4px;
+}
+
+.header__theme-menu-button_active {
+  pointer-events: none;
+}
+
+.header__theme-menu-button {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  color: var(--accent-color);
+  background: none !important;
+  border: none;
+}
+
+.header__theme-menu-button:hover {
+  border: 1px var(--accent-color) solid;
+  padding: 70 0;
+  height: 26px;
+  width: 70px;
+}
+
+.header__theme-menu-button:focus,
+.header__theme-menu-button:active {
+  text-decoration: underline var(--accent-color) solid;
+}
+
+.parent_rec {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.rec {
+  display: flex;
+  text-transform: uppercase;
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  flex-direction: row-reverse;
+margin: 20px 4px 0 0;
+  color: var(--accent-color);
+}
+
+.decorate_sign_right {
+  box-sizing: border-box;
+  width: 25px;
+  height: 25px;
+  border-top: 1px var(--accent-color) solid;
+  border-right: 1px var(--accent-color) solid;
+  margin: 20px 20px 0 0;
+}
+
+.circle {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: 7px 0 0 7px;
+  border-radius: 9px;
+  background: var(--accent-color);
+  box-shadow: 0px 0px 4px 2px var(--accent-color);
+}
+
+.parent_focus {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  padding: 2vh 0 0 0;
+}
+
+.heading_focus {
+  font-family: var(--main-font, "IBMPlexMono");
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  line-height: 83%;
+  color: var(--col-or-h);
+}
+
+.focus {
+  display: flex;
+  align-items: flex-end;
+  margin: 20vh 0 0 0;
+  text-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+.shadow_text {
+  text-shadow: 2px 1px 0 var(--accent-color);
+}
+
+.parent_header_text {
+  max-width: 491px;
+  margin: 0 0 9vw 50vw;
+}
+
+.header_text {
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--txt-color-h);
+  background: var(--bg-heading);
+}
+
+.decorate_sign {
+  box-sizing: border-box;
+  padding: 10px 0 1px 0px;
+  width: 25px;
+  height: 25px;
+  border-bottom: 1px var(--accent-color) solid;
+  border-left: 1px var(--accent-color) solid;
+  margin: 1px 1px 22px 20px;
+}
+
+main {
+  margin: auto;
+  width: var(--page-width);
+}
+
+.information {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  gap: 19.93px;
+  height: 586px;
+  padding-top: 56px;
+}
+
+.information_text_parent {
+  width: 314.9599914550781px;
+  height: 47px;
+  padding: 5px 0 0 20px;
+}
+
+.decorated-zone_maine {
+  background: var(--bg-color);
+}
+
+.information_text {
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--accent-color);
+}
+
+.information_text_right_one {
+  padding: 2px 0 0 20px;
+}
+
+ .dofamin {
+margin: 22px 0 0 0;
+ }
+
+.heading {
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  background: var(--bg-heading);
+  color: var(--txt-color-h);
+  width: 649px;
+height: 23px;
+  padding: 3px 0 0 0;
+}
+
+.text_right_parent {
+  width: 648.9175415039062px;
+  height: 211px;
+}
+
+.content_paragraph {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--text-color);
+  margin: 10px 0 0 0;
+}
+
+.content_title {
+  margin: 13px 0 0 0;
+}
+
+.heading_parent {
+  width: 649px;
+  height: 20px;
+  background: var(--bg-heading);
+}
+
+.information_lots {
+  display: grid;
+  margin: 7vh 0 0 0;
+  width: 1024px;
+  height: 526px;
+
+}
+
+.lots__heading_parent {
+  width: 315px;
+  height: 47px;
+}
+
+.lots__heading {
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--accent-color);
+  padding: 7px 0 0 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 984px;
+  height: 431px;
+  gap: 20px;
+  padding: 0 0 11px 20px;
+}
+
+.lots_card_right_task {
+  width: 315px;
+  height: 47px;
+}
+
+.card__title-name {
+  flex-direction: row;
+  background: var(--bg-heading);
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  letter-spacing: 0%;
+  color: var(--txt-color-h);
+  margin: 3px 0 0 0;
+}
+
+.card__text {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23.4px;
+  letter-spacing: 0%;
+  margin: 10px 0 0 0;
+}
+
+
+
+.card_one {
+  width: 315px;
+  height: 384px;
+  grid-row: span 5 / span 5;
+}
+
+.card_two {
+  grid-row: span 5 / span 5;
+  width: 315px;
+  height: 361px;
+}
+
+.card_three {
+  width: 315px;
+  height: 431px;
+  grid-row: span 5 / span 5;
+}
+
+.information_list_three {
+  margin: auto;
+  display: flex;
+  height: 1115px;
+  padding-top: 25px;
+  justify-content:center ;
+}
+
+.information_list_text_parent {
+  width: 315px;
+  height: 98px;
+ padding: 34px 0 0 0px;
+  grid-column: span 2 / span 2;
+  grid-row: span 3 / span 3;
+}
+
+.information_list_text {
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--accent-color);
+}
+
+.information_text_right_parent_three {
+  grid-column: span 3 / span 3;
+  grid-row: span 10 / span 10;
+  grid-column-start: 3;
+}
+
+.information_text_right_three {
+  padding: 0 0 66px 0;
+}
+
+.information_text_right {
+ display: flex;
+    padding: 3vh 0 0 20px;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.heading_list_right_parent {
+  width: 649px;
+  height: 20px;
+}
+
+.heading_list_right_sky_parent {
+  width: 649px;
+  height: 244px;
+  grid-column: span 5 / span 5;
+}
+
+.heading_top {
+  margin: 32px 0 0 20px;
+}
+
+.text_right_sky_parent {
+  width: 647.5520629882812px;
+  height: 211px;
+}
+
+.heading_list_right_music_parent {
+  width: 649px;
+  height: 150px;
+  grid-column: span 5 / span 5;
+  grid-row-start: 2;
+}
+
+.text_right_music_parent {
+  width: 649px;
+  height: 117px;
+}
+
+.heading_list_right_walk_parent {
+  width: 649px;
+  height: 197px;
+  grid-column: span 5 / span 5;
+  grid-row-start: 3;
+
+}
+
+.text_right_walk_parent {
+  width: 649px;
+  height: 197px;
+}
+
+.heading_list_right_good_parent {
+  width: 649px;
+  height: 151px;
+  grid-column: span 5 / span 5;
+  grid-row-start: 4;
+}
+
+.text_right_good_parent {
+  width: 649px;
+  height: 118px;
+}
+
+.heading_list_right_read_parent {
+  width: 649px;
+  height: 150px;
+  grid-column: span 5 / span 5;
+  grid-row-start: 5;
+}
+
+.text_right_read_parent {
+  width: 649px;
+  height: 117px;
+}
+
+.pictures {
+  height: 100%;
+  padding: 0 20px 20px 20px;
+}
+
+.heading_pictures {
+  width: 984px;
+  font-family: "IBM Plex Mono";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  background: var(--bg-heading);
+  color: var(--txt-color-h);
+  margin: 40px 0 0 0vh;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  margin: 20px 0 0 0;
+}
+
+.image_sunset {
+  grid-column: span 2 / span 2;
+  grid-row: span 3 / span 3;
+}
+
+.image_ice-scream {
+  grid-row: span 6 / span 6;
+  grid-column-start: 3;
+}
+
+.image_books {
+  grid-row: span 3 / span 3;
+  grid-column-start: 2;
+  grid-row-start: 4;
+}
+
+.image_tape {
+  grid-row: span 7 / span 7;
+  grid-column-start: 1;
+  grid-row-start: 4;
+}
+
+.image_street {
+  grid-column: span 2 / span 2;
+  grid-row: span 4 / span 4;
+  grid-column-start: 2;
+  grid-row-start: 7;
+}
+
+.sunset {
+  display: block;
+  width: 650px;
+  height: 260px;
+}
+
+.ice-scream {
+  width: 314px;
+  height: 595px;
+  object-fit: cover;
+}
+
+.books {
+  width: 315px;
+  height: 315px;
+  object-fit: contain;
+}
+
+.the_tape {
+  width: 315px;
+  height: 768px;
+  object-fit: cover;
+}
+
+.the_street {
+  width: 649px;
+  height: 433px;
+  object-fit: contain;
+}
+
+footer {
+  width: var(--page-width);
+  margin: auto;
+  display: flex;
+  height: 803px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-color);
+  block-size: 100vh;
+}
+
+.decorate_sign_footer_up_parent {
+  width: 1024px;
+  height: 30px;
+
+}
+
+.decorate_sign_footer_up {
+  box-sizing: border-box;
+  width: 25px;
+  height: 25px;
+  border-top: 1px var(--accent-color) solid;
+  border-right: 1px var(--accent-color) solid;
+ margin: 16px 0px 0px 979px;
+}
+
+.focus_footer_parent {
+  display: flex;
+  flex-direction: column;
+  height: 83%;
+  justify-content: center;
+  width: 471px;
+
+}
+
+.focus_footer {
+  padding-top: 8vh;
+  text-shadow: 2px 2px 0 var(--shadow-color);
+}
+
+.decorate_sign_footer_parent {
+  width: 1024px;
+  height: 30px;
+}
+
+.decorate_sign_footer {
+  box-sizing: border-box;
+  width: 25px;
+  height: 25px;
+  border-bottom: 1px var(--accent-color) solid;
+  border-left: 1px var(--accent-color) solid;
+  margin: 50px 103vh 0px 20px;
+}
+
