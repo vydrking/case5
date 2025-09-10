@@ -10,39 +10,100 @@ from .yandex_client import YandexGPTClient
 from .graph import build_graph
 
 
+def render_project_header(meta: dict) -> list[str]:
+	"""Render the project header section."""
+	lines = []
+	title = meta.get('title', '')
+	lines.append(f"# Автоматическое первичное ревью: {title}")
+	lines.append('')
+	return lines
+
+
+def render_project_description(meta: dict) -> list[str]:
+	"""Render the project description section."""
+	lines = []
+	lines.append('## Краткое описание проекта')
+	content = meta.get('content', '')[:1200]
+	lines.append(content)
+	lines.append('')
+	return lines
+
+
+def render_checklist(check: dict) -> list[str]:
+	"""Render the checklist section."""
+	lines = []
+	lines.append('## Чеклист (извлеченные пункты)')
+	for item in check.get('items', [])[:50]:
+		lines.append(f"- {item}")
+	lines.append('')
+	return lines
+
+
+def render_reviewer_report(review: str) -> list[str]:
+	"""Render the reviewer report section."""
+	lines = []
+	lines.append('## Отчет ревьюера')
+	lines.append(review)
+	lines.append('')
+	return lines
+
+
+def render_issues(issues: list) -> list[str]:
+	"""Render the issues section."""
+	lines = []
+	lines.append('## Проблемы по правилам (агрегированные)')
+	for issue in issues:
+		location = ', '.join(str(x) for x in issue.get('lines') or [])
+		rule = issue.get('rule', '')
+		file_path = issue.get('file', '')
+		description = issue.get('description', '')
+		suggestion = issue.get('suggestion', '')
+		lines.append(f"- [{rule}] {file_path}:{location} — {description}\n  Совет: {suggestion}")
+	lines.append('')
+	return lines
+
+
+def render_autotest_results(autores: dict) -> list[str]:
+	"""Render the autotest results section."""
+	lines = []
+	lines.append('## Результаты автотестов')
+	for result in (autores.get('results') or [])[:200]:
+		status = 'PASS' if result.get('ok') else 'FAIL'
+		test_id = result.get('id', '')
+		explanation = result.get('explanation', '')
+		test_type = result.get('type', '')
+		detail = result.get('detail', '')
+		lines.append(f"- [{status}] {test_id} — {explanation} ({test_type}) {detail}")
+	lines.append('')
+	return lines
+
+
+def render_validation(validation: str) -> list[str]:
+	"""Render the validation section."""
+	lines = []
+	lines.append('## Валидатор: итоговая оценка')
+	lines.append(validation)
+	return lines
+
+
 def render_markdown(result: dict) -> str:
+	"""Render the complete markdown report from result data."""
 	meta = result.get('project_meta') or {}
 	check = result.get('checklist') or {}
 	review = result.get('review') or ''
 	validation = result.get('validation') or ''
-	autotests = result.get('autotests') or {}
 	autores = result.get('autotest_results') or {}
 	issues = result.get('rule_issues') or []
+
 	lines = []
-	lines.append(f"# Автоматическое первичное ревью: {meta.get('title','')}")
-	lines.append('')
-	lines.append('## Краткое описание проекта')
-	lines.append(meta.get('content','')[:1200])
-	lines.append('')
-	lines.append('## Чеклист (извлеченные пункты)')
-	for it in check.get('items', [])[:50]:
-		lines.append(f"- {it}")
-	lines.append('')
-	lines.append('## Отчет ревьюера')
-	lines.append(review)
-	lines.append('')
-	lines.append('## Проблемы по правилам (агрегированные)')
-	for it in issues:
-		loc = ', '.join(str(x) for x in it.get('lines') or [])
-		lines.append(f"- [{it.get('rule')}] {it.get('file')}:{loc} — {it.get('description')}\n  Совет: {it.get('suggestion')}")
-	lines.append('')
-	lines.append('## Результаты автотестов')
-	for r in (autores.get('results') or [])[:200]:
-		status = 'PASS' if r.get('ok') else 'FAIL'
-		lines.append(f"- [{status}] {r.get('id')} — {r.get('explanation')} ({r.get('type')}) {r.get('detail')}")
-	lines.append('')
-	lines.append('## Валидатор: итоговая оценка')
-	lines.append(validation)
+	lines.extend(render_project_header(meta))
+	lines.extend(render_project_description(meta))
+	lines.extend(render_checklist(check))
+	lines.extend(render_reviewer_report(review))
+	lines.extend(render_issues(issues))
+	lines.extend(render_autotest_results(autores))
+	lines.extend(render_validation(validation))
+
 	return '\n'.join(lines)
 
 
