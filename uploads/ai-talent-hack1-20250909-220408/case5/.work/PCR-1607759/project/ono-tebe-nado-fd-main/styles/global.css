@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 1100px;
+  margin: 0 auto;
+  font-family: Raleway, sans-serif;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway';
+}
+
+a,
+span {
+  color: inherit;
+  font-size: 20px;
+  font-family: 'Raleway';
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  font: inherit;
+}

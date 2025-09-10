@@ -1,0 +1,14 @@
+/* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+
+:root {
+    --main-font: 'Inter';
+    --accent-font: 'PressStart2P';
+    /*фон из градиента*/
+    --gradient: repeating-linear-gradient(90deg, #d3d3d3 0px 2px, transparent 2px 4px), repeating-linear-gradient(180deg, #d3d3d3 0px 2px, transparent 2px 4px), linear-gradient(to bottom, #e7e7e7 0.01%, #1a1a1a);
+    /*ширина контен*/
+    --content-width: clamp(375px, calc(375px + (700 - 375)*(100vw - 375px)/(1440 - 375)), 700px);
+    /*Цвет контура*/
+    --contour-color: #000000;
+    /*цвет искр*/
+    --sparks-color: #ff0000;
+}

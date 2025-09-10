@@ -1,0 +1,22 @@
+# Local env and caches
+.env
+.env.*
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+.DS_Store
+
+# Build/run artifacts
+workdir/
+tmp/
+
+# Jupyter
+*.ipynb_checkpoints/
+
+# Heavy datasets/zips and reviewed data
+**/*.zip
+data/**/reviewed/**

@@ -1,0 +1,755 @@
+/*
+  Переменные для вашего проекта
+  и их переопределение под различные устройства
+*/
+
+/*планшет  устроиство */
+@media (max-width: 768px) {
+  .page {
+    width: 768px;
+  }
+
+  .header {
+    height: 1024px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: auto;
+    max-width: 100%;
+  }
+
+  .empty {
+    display: none;
+  }
+
+  .header__theme-menu {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .header__theme-menu-list {
+    flex-direction: column;
+    margin: 149px 30px 0 0vh;
+    padding: 0;
+    gap: 16px;
+  }
+
+  .header__theme-menu-item {
+    row-gap: 10px;
+  }
+
+  .parent_rec {
+    margin: 4px 4px 0 0;
+  }
+
+  .parent_focus {
+    margin: 0;
+  }
+
+  .focus {
+    margin: 0 0 0 0;
+  }
+
+  .rec {
+    margin: 16px 3px 0 0;
+  }
+
+  .decorate_sign_right {
+    margin: 16px 16px 0 0;
+  }
+
+  .decorated-zone_maine {
+    width: 768px;
+  }
+
+  .parent_header_text {
+    margin: 0 0 124px 50%;
+  }
+
+  .header_text {
+    padding: 0 0 0 0;
+    width: 364px;
+    height: 117px;
+    margin: 0 0 8px 0;
+  }
+
+  .information {
+    width: 768px;
+    height: 648px;
+  }
+
+  .heading_parent {
+    width: 472px;
+    height: 23px;
+  }
+
+  .heading {
+    width: 472px;
+    height: 23px;
+  }
+
+  .text_right_parent {
+    width: 472px;
+    height: 278px;
+  }
+
+  .information_text_parent {
+    width: 236px;
+    height: 71px;
+    padding: 5px 0 0 20px;
+  }
+
+  .information_list_text {
+    margin: 7% 0 0 8%;
+  }
+
+ 
+
+  .information_lots {
+    display: flex;
+    flex-direction: column;
+    margin: 10vh 0 0 0;
+    width: 727px;
+  }
+
+  .lots__heading_parent {
+    width: 236px;
+    height: 70px;
+  }
+
+  .lots__heading {
+    width: 236px;
+    height: 70px;
+    padding: 4vh 0 0 2vh;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 728px;
+    margin: 57px 0 0 0;
+  }
+
+  .card__text {
+    margin: 1% 0 0 0;
+  }
+
+  .card__title-name {
+    margin: 0;
+  }
+
+  .card_one {
+    grid-column: span 5 / span 5;
+    grid-row: span 2 / span 2;
+    width: 728px;
+    height: 174px;
+  }
+
+  .card_two {
+    grid-column: span 5 / span 5;
+    grid-row: span 2 / span 2;
+    grid-row-start: 3;
+    width: 728px;
+    height: 174px;
+  }
+
+  .card_three {
+    width: 728px;
+    height: 197px;
+    grid-column: span 5 / span 5;
+    grid-row: span 2 / span 2;
+    grid-row-start: 5;
+  }
+
+  .information_text_right {
+    width: 472px;
+    gap: 20px;
+    padding: 10px 0 0 20px;
+  }
+
+  .heading_top {
+    width: 472px;
+    height: 23px;
+    margin: 3% 0 0 20px;
+  }
+
+  .information_text_right_three {
+    padding: 0 19px 0 0;
+  }
+
+  .information_list_text_parent {
+    padding: 0;
+  }
+
+  .heading_list_right_parent {
+    width: 472px;
+    margin: 13px 0 0 0;
+  }
+
+  .heading_list_right_sky_parent {
+    width: 472px;
+    height: 310px;
+  }
+
+  .heading_list_right_music_parent {
+    width: 472px;
+    height: 198px;
+    margin: 17px 0 0 0 ;
+  }
+
+  .heading_list_right_walk_parent {
+    width: 472px;
+    height: 290px;
+  }
+
+  .heading_list_right_good_parent {
+    width: 472px;
+    height: 197px;
+  }
+
+  .heading_list_right_read_parent {
+    width: 472px;
+    height: 175px;
+  }
+
+  .text_right_sky_parent {
+    width: 472px;
+    height: 280.1079406738281px;
+    margin: 3% 0 0 0;
+  }
+
+  .text_right_music_parent {
+    width: 472px;
+    height: 164px;
+  }
+
+  .text_right_walk_parent {
+    width: 472px;
+    height: 257.1134033203125px;
+  }
+
+  .text_right_good_parent {
+    width: 472px;
+    height: 163.17172241210938px;
+  }
+
+  .text_right_read_parent {
+    width: 472px;
+    height: 141px;
+  }
+
+  .information_list_three {
+    height: 1296px;
+    top: 2567px;
+    margin-top: 29vw;
+  }
+
+  .pictures {
+    width: 728px;
+    height: 823px;
+    margin: 12vh 0 0 0;
+  }
+
+  .gallery {
+    margin: 20px 0 0 0;
+  }
+
+  .heading_pictures {
+    width: 728px;
+    height: 23px;
+  }
+  .sunset {
+    width: 479.00006103515625px;
+    height: 192px;
+  }
+
+  .ice-scream {
+    width: 229px;
+    height: 442px;
+  }
+
+  .books {
+    width: 230.00001525878906px;
+    height: 230px;
+  }
+
+  .the_tape {
+    width: 229px;
+    height: 568px;
+  }
+
+  .the_street {
+    width: 479px;
+    height: 318px;
+  }
+
+  footer {
+    width: 768px;
+    height: 1067px;
+    padding: 0;
+  }
+
+  .decorate_sign_footer_up_parent {
+    margin: 0 0vh 0px 0;
+    width: 768px;
+  }
+
+  .decorate_sign_footer_up {
+    margin: 23px 0 0 723px;
+  }
+
+  .decorate_sign {
+    box-sizing: border-box;
+    padding: 25px 0 0px 0px;
+    width: 25px;
+    height: 25px;
+    border-bottom: 1px var(--accent-color) solid;
+    border-left: 1px var(--accent-color) solid;
+    margin: 5px 0px 20px 20px;
+  }
+
+  .decorate_sign_footer_parent {
+    width: 768px;
+  }
+
+  .decorate_sign_footer {
+    margin: 60px 0 0 20px;
+  }
+
+  .focus_footer {
+    padding: 7vh 0 0 34px;
+  }
+
+  .focus_footer_parent {
+    margin: 1vh 0 0 4vh;
+  }
+}
+
+@media (max-width: 375px) {
+  .header {
+    height: 668px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: auto;
+    max-width: 100%;
+  }
+
+  .page {
+    width: 375px;
+  }
+
+  .empty {
+    display: none;
+  }
+
+  .parent_rec {
+    margin: 0px 0px 4px 0;
+  }
+
+  .header__theme-menu {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .header__theme-menu-list {
+    display: flex;
+    width: 70px;
+    height: 98px;
+    margin: 20px 3px 0 0vh;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .decorate_sign_right {
+    margin: 10px 10px 10px 0;
+  }
+
+  .rec {
+    margin: 10px 4px 0 0px;
+  }
+
+  .parent_focus {
+    width: 355px;
+    height: 192px;
+    margin: 0% 0 0 1%;
+  }
+
+  .focus {
+    font-size: 116px;
+    padding: 0;
+    margin: 20vh 0 0 1vh;
+  }
+
+  .parent_header_text {
+    margin: 24% 0 0vh 2%;
+  }
+
+  .header_text {
+    width: 355px;
+    height: 117px;
+    margin: 36px 0 0 2px;
+  }
+
+  .decorate_sign {
+    margin: 30px 0 0 10px;
+  }
+
+  .information {
+    width: 375px;
+    height: 949px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 0;
+    padding: 6vh 0 0 0;
+    gap: 20px;
+  }
+
+  .content_title {
+    margin: 8px 0 0px 0;
+  }
+
+  .information_text_parent {
+    width: 355px;
+    height: 47px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+  }
+
+  .heading_parent {
+    width: 355px;
+    height: 23px;
+  }
+
+  .heading {
+    margin: 0;
+    padding: 0;
+    width: 355px;
+    height: 23px;
+  }
+
+  .text_right_parent {
+    width: 351.0270690917969px;
+    height: 398px;
+  }
+
+  .information_lots {
+    display: flex;
+    width: 355px;
+    height: 1119px;
+    flex-direction: column;
+    padding: 0 0 0 0;
+    margin: 22% 0 0 0;
+    gap: 20px;
+  }
+
+  .lots__heading_parent {
+    width: 355px;
+    height: 47px;
+    margin: 9px 0 0 10px;
+  }
+
+  .lots__heading {
+    width: 355px;
+    height: 47px;
+    margin: 0;
+    padding: 0 0 0 0px;
+  }
+
+  .information_list_text {
+    width: 355px;
+    height: 70px;
+    left: 10px;
+    margin: 31px 0 0 10px;
+  }
+
+  .information_list_text_parent {
+    width: 355px;
+    height: 70px;
+
+    padding: 3% 0 0 0vh;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 355px;
+    height: 1052px;
+    margin: 0 0 0 10px;
+    gap:20px;
+  }
+
+  .card_one,
+  .card_three {
+    width: 355px;
+  }
+
+  .card_one {
+    height: 314px;
+    width: 362px;
+    margin: 0 0 0 0;
+  }
+
+  .card_two {
+    height: 314px;
+    width: 362px;
+  }
+
+  .card_three {
+    height: 384px;
+  }
+
+  .card__text {
+    line-height: 130%;
+    margin: 2% 0 0 0;
+  }
+
+  .сard__text_one {
+    width: 355px;
+    height: 281px;
+  }
+
+  .сard__text_two {
+    width: 354.9990234375px;
+    height: 281px;
+  }
+
+  .сard__text_three {
+    width: 355px;
+    height: 351px;
+  }
+
+  .card__title-name {
+    width: 355px;
+    height: 24px;
+    margin: 0;
+  }
+
+  .information_list_three {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 53px 0 0 0px;
+    width: 375px;
+    height: 1737px;
+    top: 2876px;
+  }
+
+  .heading_list_right_parent {
+    width: 355px;
+    height: 23px;
+    top: 67px;
+   
+  }
+
+  .heading_list_right_sky_parent {
+    width: 355.0001220703125px;
+    height: 408px;
+  }
+
+  .heading_list_right_music_parent {
+    width: 355px;
+    height: 244px;
+    margin: 0 ;
+  }
+
+  .heading_list_right_walk_parent {
+    width: 355px;
+    height: 384px;
+    padding: 0;
+  }
+
+  .heading_list_right_good_parent {
+    width: 355px;
+    height: 244px;
+    padding: 0;
+  }
+
+  .heading_list_right_read_parent {
+    width: 355px;
+    height: 220px;
+    padding: 0;
+  }
+
+  .information_text_right_three {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 28px 0 0 10px;
+    gap: 20px;
+  }
+
+  .heading_top {
+    width: 355px;
+    height: 47px;
+    margin: 34px 0 0 0px;
+  }
+
+  .text_right_sky_parent {
+    width: 354.8390808105469px;
+    height: 375px;
+  }
+
+  .text_right_music_parent {
+    width: 355px;
+    height: 211px;
+  }
+
+  .text_right_walk_parent {
+    width: 353.50238037109375px;
+    height: 351px;
+  }
+
+  .text_right_good_parent {
+    width: 355px;
+    height: 211px;
+  }
+
+  .text_right_read_parent {
+    width: 355px;
+    height: 187px;
+  }
+
+  .content_paragraph {
+    margin: 11px 0 0 0;
+  }
+
+  .information_text_right {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    gap: 20px;
+    width: 359px;
+    margin: 0 0 33px 0;
+  }
+
+  .pictures {
+    display: flex;
+    flex-direction: column;
+    width: 355px;
+    height: 1400px;
+    padding: 0;
+    margin: 54px 0 0 0;
+    gap: 10px;
+  }
+
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 0 10px;
+  }
+
+  .heading_pictures {
+    width: 354.9991760253906px;
+    height: 24px;
+    left: 10px;
+    margin: 0 0 0 10px;
+  }
+
+  .sunset {
+    width: 354.9991760253906px;
+    height: 142px;
+    top: 34px;
+    left: 10px;
+  }
+
+  .ice-scream {
+    width: 354.9991760253906px;
+    height: 355px;
+    top: 186px;
+    left: 10px;
+  }
+
+  .books {
+    width: 354.9991760253906px;
+    height: 355px;
+    top: 798px;
+    left: 10px;
+  }
+
+  .image_tape {
+    width: 355px;
+    height: 237px;
+  }
+
+  .the_tape {
+    width: 355px;
+    height: 237px;
+    top: 551px;
+    left: 10px;
+  }
+
+  .image_street {
+    width: 354.9991760253906px;
+    height: 237px;
+  }
+
+  .the_street {
+    width: 354.9991760253906px;
+    height: 237px;
+    top: 1163px;
+    left: 10px;
+  }
+
+  footer {
+    width: 375px;
+    height: 689px;
+  }
+
+  .focus_footer {
+    padding: 9vh 0 0 0px;
+    line-height: 83%;
+    margin: 0;
+  }
+
+  .decorate_sign_footer_up_parent {
+    margin: 0% 0 0 0%;
+    width: 375px;
+  }
+
+  .decorate_sign_footer_up {
+    margin: 31px 0 0 91%;
+  }
+
+  .decorate_sign_footer {
+    margin: 32px 0 0 10px;
+  }
+
+  .focus_footer_parent {
+    height: 86%;
+    width: 360px;
+    margin: 0 0% 0% 0;
+  }
+
+  .decorate_sign_footer_parent {
+    width: 375px;
+  }
+
+  .decorated-zone_maine {
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+
+  }
+
+  .information_text_right_one {
+    width: 355px;
+    margin: 0 0 0 0px;
+    padding: 0 0 0 10px;
+  }
+
+  .information_text {
+    margin: 0 0 0 10px;
+    width: 355px;
+    height: 47px;
+  }
+
+  .dofamin {
+    margin: 19px 0 0 0;
+  }
+}
