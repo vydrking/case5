@@ -1,1 +1,0 @@
-https://github.com/MoonyArt/slozhno-sosredotochitsya-fd.git
