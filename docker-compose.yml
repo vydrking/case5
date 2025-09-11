@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+    image: code-review-inference:latest
+    environment:
+      - YANDEX_FOLDER_ID=${YANDEX_FOLDER_ID}
+      - YANDEX_API_KEY=${YANDEX_API_KEY}
+      - EXTRA_CA_BUNDLE=${EXTRA_CA_BUNDLE}
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

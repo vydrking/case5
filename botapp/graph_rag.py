@@ -1,19 +1,15 @@
 import os
 import re
+import bisect
 
-# Простой графовый RAG над исходниками: строим граф файлов/классов/функций,
-# извлекаем связи import/contains, режем текст на чанки и отбираем
-# релевантные узлы под бюджет контекста.
 
 
 def _supported(path: str) -> bool:
-    # Поддерживаемые расширения исходников
     exts = ('.py', '.js', '.ts', '.java', '.cpp', '.c', '.go', '.rb', '.php', '.rs', '.kt', '.m', '.swift', '.html', '.css')
     return path.endswith(exts)
 
 
 def _read(path: str) -> str:
-    # Толерантное чтение файла (пропускаем ошибки кодировки)
     try:
         with open(path, 'r', encoding='utf-8') as f:
             return f.read()
@@ -21,27 +17,30 @@ def _read(path: str) -> str:
         return ''
 
 
-def _chunk(text: str, size: int = 800, overlap: int = 120) -> list[str]:
-    # Нестрогое разбиение на перекрывающиеся чанки для устойчивости к границам
+def _chunk(text: str, size: int = 800, overlap: int = 120, base_line: int = 1) -> list[dict]:
     if size <= 0:
-        return [text]
-    chunks: list[str] = []
+        ln = text.count('\n') + 1
+        return [{'text': text, 'start': 0, 'end': len(text), 'line_start': base_line, 'line_end': base_line + ln - 1}]
+    line_breaks = [i for i, ch in enumerate(text) if ch == '\n']
     i = 0
     n = len(text)
+    chunks: list[dict] = []
     while i < n:
-        chunks.append(text[i:i + size])
+        start = i
+        end = min(n, i + size)
+        ls = bisect.bisect_right(line_breaks, start - 1) + base_line
+        le = bisect.bisect_right(line_breaks, end - 1) + base_line
+        chunks.append({'text': text[start:end], 'start': start, 'end': end, 'line_start': ls, 'line_end': le})
         i += max(1, size - overlap)
     return chunks
 
 
 def _module_name(path: str) -> str:
-    # Имя модуля для сопоставления import → файл
     base = os.path.basename(path)
     return os.path.splitext(base)[0].lower()
 
 
 def _extract_imports(code: str) -> list[str]:
-    # Простейшее извлечение импортов: import x / from x import y
     results: list[str] = []
     for m in re.finditer(r'\bimport\s+([a-zA-Z0-9_\.]+)', code):
         results.append(m.group(1).split('.')[0].lower())
@@ -51,7 +50,6 @@ def _extract_imports(code: str) -> list[str]:
 
 
 def _extract_units(code: str) -> list[dict]:
-    # Сигнатурное извлечение классов и функций (без парсера AST)
     units: list[dict] = []
     for m in re.finditer(r'\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\b', code):
         name = m.group(1)
@@ -67,7 +65,6 @@ def _extract_units(code: str) -> list[dict]:
 
 
 def build_code_graph(root_dir: str) -> dict:
-    # Обход каталога, построение узлов и рёбер графа
     nodes: dict[str, dict] = {}
     edges: list[tuple[str, str, str]] = []
     file_paths: list[str] = []
@@ -90,7 +87,7 @@ def build_code_graph(root_dir: str) -> dict:
             'name': os.path.basename(p),
             'path': p,
             'text': code,
-            'chunks': _chunk(code, 900, 150)
+            'chunks': _chunk(code, 900, 150, 1)
         }
         for imp in _extract_imports(code):
             if imp in name_to_path:
@@ -99,13 +96,14 @@ def build_code_graph(root_dir: str) -> dict:
         for u in _extract_units(code):
             uid = f"{fid}::{u['type']}::{u['name']}"
             segment = code[u['start']:u['end']]
+            base_ln = code[:u['start']].count('\n') + 1
             nodes[uid] = {
                 'id': uid,
                 'type': u['type'],
                 'name': u['name'],
                 'path': p,
                 'text': segment,
-                'chunks': _chunk(segment, 700, 120)
+                'chunks': _chunk(segment, 700, 120, base_ln)
             }
             edges.append((fid, uid, 'contains'))
     graph = {'nodes': nodes, 'edges': edges}
@@ -113,12 +111,10 @@ def build_code_graph(root_dir: str) -> dict:
 
 
 def _tokenize(text: str) -> list[str]:
-    # Грубый токенайзер по небуквенным символам
     return [t for t in re.split(r'[^a-zA-Z0-9_]+', (text or '').lower()) if t]
 
 
 def _score_node(node: dict, checklist: str | None, indeg: dict[str, int], outdeg: dict[str, int]) -> float:
-    # Эвристика ранжирования: семантические совпадения, центральность, длина
     s = 0.0
     name = (node.get('name') or '').lower()
     tks = set(_tokenize(node.get('text') or ''))
@@ -139,7 +135,6 @@ def _score_node(node: dict, checklist: str | None, indeg: dict[str, int], outdeg
 
 
 def _degrees(edges: list[tuple[str, str, str]]) -> tuple[dict[str, int], dict[str, int]]:
-    # Быстрый расчёт in/out степеней для эвристик
     indeg: dict[str, int] = {}
     outdeg: dict[str, int] = {}
     for a, b, _ in edges:
@@ -148,8 +143,7 @@ def _degrees(edges: list[tuple[str, str, str]]) -> tuple[dict[str, int], dict[st
     return indeg, outdeg
 
 
-def select_context_nodes(graph: dict, checklist: str | None, budget_chars: int = 6000) -> str:
-    # Выбор верхних узлов по скору и сборка контекста под бюджет
+def select_context_nodes(graph: dict, checklist: str | None, budget_chars: int = 2800) -> str:
     nodes = graph['nodes']
     edges = graph['edges']
     indeg, outdeg = _degrees(edges)
@@ -163,8 +157,12 @@ def select_context_nodes(graph: dict, checklist: str | None, budget_chars: int =
         node = nodes[nid]
         header = f"=== {node['type']} | {node.get('name') or ''} | {node['path']} ===\n"
         content = header
-        for ch in node['chunks'][:2]:
-            content += ch + '\n'
+        for ch in node['chunks'][:1]:
+            line_note = f"[lines {ch['line_start']}-{ch['line_end']}]\n"
+            lines = ch['text'].splitlines()
+            start_ln = ch['line_start']
+            numbered = '\n'.join(f"{start_ln + i}: {lines[i]}" for i in range(len(lines)))
+            content += line_note + numbered + '\n'
         if total + len(content) > budget_chars:
             break
         picked.append(content)
@@ -175,20 +173,18 @@ def select_context_nodes(graph: dict, checklist: str | None, budget_chars: int =
     for a, b, t in edges:
         rels.setdefault(a, []).append(f'{t}->{b}')
     rel_lines: list[str] = []
-    for a, lst in list(rels.items())[:40]:
+    for a, lst in list(rels.items())[:10]:
         rel_lines.append(f'{a} : ' + ', '.join(lst[:6]))
     graph_summary = 'Граф связей (сокращенно):\n' + '\n'.join(rel_lines) + '\n\n'
     return graph_summary + '\n'.join(picked)
 
 
 def prepare_graph_rag_context(root_dir: str, checklist: str | None) -> str:
-    # Однопроходная сборка контекста для промпта
     g = build_code_graph(root_dir)
-    return select_context_nodes(g, checklist, 6000)
+    return select_context_nodes(g, checklist, 2400)
 
 
-def prepare_graph_rag_batches(root_dir: str, checklist: str | None, batch_budget: int = 3500, max_batches: int = 4) -> list[str]:
-    # Формирование нескольких батчей для многопроходного анализа
+def prepare_graph_rag_batches(root_dir: str, checklist: str | None, batch_budget: int = 2000, max_batches: int = 2) -> list[str]:
     g = build_code_graph(root_dir)
     nodes = g['nodes']
     edges = g['edges']
@@ -212,7 +208,11 @@ def prepare_graph_rag_batches(root_dir: str, checklist: str | None, batch_budget
             header = f"=== {node['type']} | {node.get('name') or ''} | {node['path']} ===\n"
             content = header
             for ch in node['chunks'][:2]:
-                content += ch + '\n'
+                line_note = f"[lines {ch['line_start']}-{ch['line_end']}]\n"
+                lines = ch['text'].splitlines()
+                start_ln = ch['line_start']
+                numbered = '\n'.join(f"{start_ln + i}: {lines[i]}" for i in range(len(lines)))
+                content += line_note + numbered + '\n'
             if total + len(content) > batch_budget and parts:
                 break
             parts.append(content)
